@@ -1,0 +1,11 @@
+4e5cd86101f2ee1dfddc9f670081b252 *DESCRIPTION
+4bd6dee3f31f35c14f4dfb5e553e25da *NAMESPACE
+3a549f99b3ab552c0c4da806074e11ac *R/fcm.R
+a4035420d0512f5e6218dba29f8e8bbe *R/fcm.infer.R
+ce42c950563ac6842e328312a16a5039 *build/vignette.rds
+2546fe12c676c5e66e5b0677a93449de *inst/doc/vignettes.R
+f6df32398ec06a95666827cdc24edf55 *inst/doc/vignettes.Rmd
+554b161b7c8bd8914a1ec68a8c573152 *inst/doc/vignettes.html
+156b74917b24583473f24f0d9098b828 *man/fcm.Rd
+48e012b4bc4c1fc1485dc4edf6466b69 *man/fcm.infer.Rd
+96c775a458a8c19180e9c2a7632850dc *vignettes/vignettes.Rmd
