@@ -77,7 +77,7 @@ ggplot(data=df2,
        aes(x=iterations, y=value, group=variable, colour=variable)) +
        theme_bw() + geom_line(size=0.7) + geom_point(size = 2)
 }
-## End(Not run)
+
 \dontshow{
 # Example 1 for the FCM inference with 7 nodes
 

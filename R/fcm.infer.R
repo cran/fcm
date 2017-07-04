@@ -66,7 +66,7 @@
 #'        aes(x=iterations, y=value, group=variable, colour=variable)) +
 #'        theme_bw() + geom_line(size=0.7) + geom_point(size = 2)
 #' }
-#' ## End(Not run)
+#'
 #' \dontshow{
 #' # Example 1 for the FCM inference with 7 nodes
 #'
@@ -327,13 +327,16 @@
       }
       cv.mat<-do.call("rbind",mylist3)
 
-
+      if (cv.mat[[i]] == 2) {
+        cat("\n WARNING: More iterations are required to reach the convergence.\n \n")
+      } else {
       conv_state <- min(which(cv.mat == 1))
-      cat(sprintf("\n The concepts' values are converged in %ith state (e <= %f) \n", conv_state + 1, e))
+      cat(sprintf("\n The concepts' values are converged in the %ith state (e <= %f) \n", conv_state + 1, e))
       cat("\n")
       print(A[(conv_state + 1),], row.names = FALSE)
       cat("\n")
-    }
+       }
+     }
 
 
      outlist <- list('values'= A)     # the concepts values in each state
