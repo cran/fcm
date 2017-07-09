@@ -1,6 +1,6 @@
 ---
 title: "Inference of Fuzzy Cognitive Maps (FCMs)"
-author: "Zoumpolia Dikopoulou, Elpiniki Papageorgiou"
+author: "Zoumpoulia Dikopoulou, Elpiniki Papageorgiou"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -13,7 +13,7 @@ vignette: >
 
 ###The fcm package
 
-Estimates the Inference of a Fuzzy Cognitive Map. Moreover, the "**fcm**" package provides a selection of **6 different inference rules** and **4 threshold functions** in order to obtain the FCM inference. It returns a dataframe of the concepts' values of each state after the inference procedure. FCM is proven to be capable of causal inference and is applicable to complex decision problems where numerous interlinked dependent variables influence one another. 
+Estimates the Inference of a Fuzzy Cognitive Map. Moreover, the "**fcm**" package provides a selection of **3 different inference rules** and **4 threshold functions** in order to obtain the FCM inference. It returns a dataframe of the concepts' values of each state after the inference procedure. FCM is proven to be capable of causal inference and is applicable to modeling complex decision problems where numerous interlinked dependent variables influence one another. 
 
 <br>
  
@@ -30,7 +30,7 @@ FCMs are fuzzy signed directed graphs with feedback. Each interconnection betwee
 <br>
 
 #### Inference Rules
-Every concept in the FCM graph has a value $A_{i}$ that expresses the quantity of its corresponding physical value and it is derived by the transformation of the fuzzy values assigned by the experts to numerical values. The value $A_{i}$ of each concept $C_{i}$ is calculated during every at each the simulation step, computing the influence of other concepts to the specific concept by selecting one of the following equations (inference rules): 
+Every concept in the FCM graph has a value $A_{i}$ that expresses the quantity of its corresponding physical value and it is derived by the transformation of the fuzzy values assigned by the experts to numerical values. The value $A_{i}$ of each concept $C_{i}$ is calculated during each simulation step, computing the influence of other concepts to the specific concept by selecting one of the following equations (inference rules): 
 
 
 | **Inference Rule**         |      **Equation**                                                                |
@@ -52,7 +52,7 @@ where $A_{i}(k+1)$ is the value of concept $C_{i}$ at simulation step $k+1$, $A_
 |                        |                                                                                        |
 
        
-where \lambda is a real positive number ($\lambda>0$) which determines the steepness of the continuous function $f$ and $x$ is the value $A_{i}(k)$ on the equilibrium point. The sigmoid threshold function ensures that the calculated value of each concept will belong to the interval [0,1]. When the values of concepts can be negative and their values belong to the interval [-1,1], the following function is used: $f(x)=tanh(x)$. The FCM model of the system takes the initial values of concepts and weights based on experts knowledge and experience for the real system and it is free to interact. At each step, the value $A_{i}$ of a concept is influenced by the values of concepts connected to it and it is updated according to the inference rule.
+where $\lambda$ is a real positive number ($\lambda>0$) which determines the steepness of the continuous function $f$ and $x$ is the value $A_{i}(k)$ on the equilibrium point. The sigmoid threshold function ensures that the calculated value of each concept will belong to the interval [0,1]. When the values of concepts can be negative and their values belong to the interval [-1,1], the following function is used: $f(x)=tanh(x)$. The FCM model of the system takes the initial values of concepts and weights based on experts knowledge and experience for the real system and then it is free to interact. At each step, the value $A_{i}$ of a concept is influenced by the values of concepts connected to it and it is updated according to the inference rule.
 
 <br>
 
@@ -72,7 +72,7 @@ library(fcm)
 
 ### Step 2: Create (or import) the weight matrix and the activation vector 
 
-The **weight matrix** stores the weights assigned to the pairs of concepts which are usually normalized to the interval $[0, 1]$ or $[−1, +1]$. The dimension of the weight matrix is *m x m*, where m denotes the number of the columns (nodes). 
+The **weight matrix** stores the weights assigned to the pairs of concepts which are usually normalized to the interval $[0, 1]$ or $[-1, +1]$. The dimension of the weight matrix is *m x m*, where m denotes the number of the columns (nodes). 
 
 The **activation vector** contains the initial concept values which each concept is turned on or activated by making its vector element 1 or 0 or in $[0, 1]$. The dimension of the activation matrix is *1 x m*.
 
@@ -113,12 +113,12 @@ There are seven input arguments in the `fcm.infer` function:
 | **Arguments**    |      **Explanation**                                                                   |
 |------------------|-------------------------------------------------------------------------------------- |
 | **activation_vec**  | The activation vector contains the initial concept values which each concept is turned on or activated by making its vector element 1 or 0 or in $[0,1]$      |
-| **weight_mat**      | The weight matrix stores the weights assigned to the pairs of concepts which are usually normalized to the interval $[0, 1]$ or $[−1, +1]$ 
+| **weight_mat**      | The weight matrix stores the weights assigned to the pairs of concepts which are usually normalized to the interval $[0, 1]$ or $[-1, +1]$ 
 | **iter**            | The number of iterations is a positive number ($iter > 0$). *Default value: $iter = 20$* |
 | **infer**           | Six different inference rules are available (Kosko: `'k'`, modified Kosko: `'mk'`,  Rescale: `'r'`, Kosko-clamped: `'kc'`, modified Kosko-clamped: `'mkc'` or Rescale-clamped: `'rc'`).         *Default value: `infer = 'k'` *  |
 | **transform**       | Four transformation functions (Bivalent: `'b'`,  Trivalent: `'tr'`,  Sigmoid: `'s'` or Hyperbolic tangent: `'t'`). *Default value: transform = `'s'`* |
 | **lambda**           | The lambda ($\lambda$) parameter is a positive number, higher than zero and lower-equal to ten, $0<\lambda\leq10$. *Default value: $lambda = 1$ *|
-| **e**                | Epsilon ($\epsilon$) is a residual, describing the minimum error difference among the subsequent concepts. Its value depends on the application type. The possible e values are: `0.01, 0.001, 0.0001, 0.00001 or 0.000001`. *Default value: $e = 0.001$*  |
+| **e**                | Epsilon ($\epsilon$) is a residual, describing the minimum error difference among the subsequent concepts. Its value depends on the application type. The possible $e$ value is determined between `0.01` and `0.000001`. *Default value: $e = 0.001$*  |
 |                  |                                                                                        |
 
 
